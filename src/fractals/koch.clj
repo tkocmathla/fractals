@@ -8,38 +8,34 @@
 (def iterations 8)
 (def theta (* 60 (/ Math/PI 180) -1))
 
-(defn a [start _] (. start copy))
-(defn b [start end] (doto (PVector/sub end start) (. div 3) (. add start)))
-(defn c [start end] (let [v (doto (PVector/sub end start) (. div 3))]
-                      (doto (. start copy)
-                        (. add v)
-                        (. add (. v (rotate theta))))))
-(defn d [start end] (doto (PVector/sub start end) (. div 3) (. add end)))
-(defn e [_ end] (. end copy))
+(defn a [v1 _] (. v1 copy))
+(defn b [v1 v2] (doto (PVector/sub v2 v1) (. div 3) (. add v1)))
+(defn c [v1 v2] (let [v (doto (PVector/sub v2 v1) (. div 3))]
+                  (doto (. v1 copy)
+                    (. add v)
+                    (. add (. v (rotate theta))))))
+(defn d [v1 v2] (doto (PVector/sub v1 v2) (. div 3) (. add v2)))
+(defn e [_ v2] (. v2 copy))
 
-(defn koch [[start end]]
+(defn koch [[v1 v2]]
   (when (< (q/frame-count) iterations)
-    (partition 2 1 ((juxt a b c d e) start end))))
+    (partition 2 1 ((juxt a b c d e) v1 v2))))
 
 (defn setup []
   (q/frame-rate 2)
-  {:lines [[(PVector. 0 (- (q/height) 20))
-            (PVector. (q/width) (- (q/height) 20))]]})
+  [[(PVector. 0 (- (q/height) 20))
+    (PVector. (q/width) (- (q/height) 20))]])
 
-(defn step [{:keys [lines]}]
-  {:lines (mapcat koch lines)})
-
-(defn draw [{:keys [lines]}]
+(defn draw [lines]
   (when (seq lines)
     (q/background 255)
-    (doseq [[start end] lines]
-      (q/line (. start x) (. start y) (. end x) (. end y)))))
+    (doseq [[v1 v2] lines]
+      (q/line (.x v1) (.y v1) (.x v2) (.y v2)))))
 
 (q/defsketch koch-curve
   :title "Koch Curve"
   :size [1000 400]
   :setup setup
-  :update step
+  :update (partial mapcat koch)
   :draw draw
-  :features [:keep-on-top]
   :middleware [qm/fun-mode])
