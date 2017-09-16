@@ -13,12 +13,9 @@
 (defn setup []
   (q/frame-rate 2)
   (q/fill 0)
-  {:lines [{:x (- (/ (q/width) 2) 450) :y y-pad :len 900}]})
+  [{:x (- (/ (q/width) 2) 450) :y y-pad :len 900}])
 
-(defn step [{:keys [lines]}]
-  {:lines (flatten (keep cantor lines))})
-
-(defn draw [{:keys [lines]}]
+(defn draw [lines]
   (doseq [{:keys [x y len]} lines]
     (q/rect x y len 20)))
 
@@ -26,6 +23,6 @@
   :title "Cantor Set"
   :size [1000 500]
   :setup setup
-  :update step
+  :update (partial mapcat cantor)
   :draw draw
   :middleware [qm/fun-mode])

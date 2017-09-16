@@ -35,6 +35,4 @@
   :setup setup
   :update (partial mapcat sierpinski)
   :draw draw
-  :features [:keep-on-top]
   :middleware [qm/fun-mode])
-
