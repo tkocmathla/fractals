@@ -27,6 +27,5 @@
 (q/defsketch tree
   :title "Tree"
   :size [600 600]
-  :setup setup
   :draw draw
   :middleware [qm/fun-mode])
