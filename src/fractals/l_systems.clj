@@ -8,19 +8,21 @@
    {:n 5 :start-x 500 :start-y 450 :angle 90 :len -5 :sentence "F-F-F-F" :rules {\F "F-F+F+FF-F-F+F"}}
    ; quadratic snowflake curve
    {:n 6 :start-x 700 :start-y 500 :angle 90 :len -8 :sentence "-F" :rules {\F "F+F-F-F+F"}}
+   ; pentagons of pentagons
+   {:n 6 :start-x 25 :start-y 350 :angle 72 :len -8 :sentence "F-F-F-F-F" :rules {\F "F-F++F+F-F-F"}}
 
    ; islands and lakes
    {:n 4 :start-x 150 :start-y 450 :angle 90 :len -8 :sentence "F+F+F+F" :rules {\F "F+f-FF+F+FF+Ff+FF-f+FF-F-FF-Ff-FFF" \f "ffffff"}}
 
-   ; sierpinski gasket
+   ; sierpinski gasket with edge rewriting
    {:n 8 :start-x 300 :start-y 500 :angle 60 :len -7 :sentence "r" :rules {\l "r+l+r" \r "l-r-l"}}
-   ; hexagonal gosper curve
+   ; hexagonal gosper curve with edge rewriting
    {:n 6 :start-x 150 :start-y 500 :angle 60 :len -10 :sentence "r" :rules {\l "l+r++r-l--ll-r+" \r "-l+rr++r+l--l-r"}}
 
-   ; tree with edge rewriting
+   ; tree with node rewriting
    {:n 6 :start-x 350 :start-y 600 :angle 22.5 :len -10 :sentence "F" :rules {\F "FF+[+F-F-F]-[-F+F+F]"}}])
 
-(def system (get systems 5))
+(def system (get systems 0))
 
 (def commands
   {\F #(do (q/line 0 0 0 (:len system)) (q/translate 0 (:len system)))
