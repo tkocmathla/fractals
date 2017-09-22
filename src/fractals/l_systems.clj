@@ -20,7 +20,13 @@
    {:n 6 :start-x 150 :start-y 500 :angle 60 :len -10 :sentence "r" :rules {\l "l+r++r-l--ll-r+" \r "-l+rr++r+l--l-r"}}
 
    ; tree with node rewriting
-   {:n 6 :start-x 350 :start-y 600 :angle 22.5 :len -10 :sentence "F" :rules {\F "FF+[+F-F-F]-[-F+F+F]"}}])
+   {:n 6 :start-x 350 :start-y 600 :angle 22.5 :len -10 :sentence "F" :rules {\F "FF+[+F-F-F]-[-F+F+F]"}}
+   ; tree 2
+   {:n 9 :start-x 350 :start-y 600 :angle 20 :len -2 :sentence "f" :rules {\f "F[+f]F[-f]+f" \F "FF"}}
+   ; tree 3
+   {:n 9 :start-x 350 :start-y 600 :angle 25.7 :len -2 :sentence "f" :rules {\f "F[+f][-f]Ff" \F "FF"}}
+   ; tree 4
+   {:n 10 :start-x 350 :start-y 600 :angle 25.7 :len -1 :sentence "f" :rules {\f "F-[[f]+f]+F[+Ff]-f" \F "FF"}}])
 
 (def system (get systems 0))
 
