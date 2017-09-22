@@ -5,28 +5,28 @@
 
 (def systems
   [; quadratic koch island
-   {:n 5 :start-x 500 :start-y 450 :angle 90 :len -5 :sentence "F-F-F-F" :rules {\F "F-F+F+FF-F-F+F"}}
+   {:n 5 :start-x 500 :start-y 450 :angle 90 :len -5 :axiom "F-F-F-F" :rules {\F "F-F+F+FF-F-F+F"}}
    ; quadratic snowflake curve
-   {:n 6 :start-x 700 :start-y 500 :angle 90 :len -8 :sentence "-F" :rules {\F "F+F-F-F+F"}}
+   {:n 6 :start-x 675 :start-y 500 :angle 90 :len -8 :axiom "-F" :rules {\F "F+F-F-F+F"}}
    ; pentagons of pentagons
-   {:n 6 :start-x 25 :start-y 350 :angle 72 :len -8 :sentence "F-F-F-F-F" :rules {\F "F-F++F+F-F-F"}}
+   {:n 6 :start-x 110 :start-y 325 :angle 72 :len -6 :axiom "F-F-F-F-F" :rules {\F "F-F++F+F-F-F"}}
 
    ; islands and lakes
-   {:n 4 :start-x 150 :start-y 450 :angle 90 :len -8 :sentence "F+F+F+F" :rules {\F "F+f-FF+F+FF+Ff+FF-f+FF-F-FF-Ff-FFF" \f "ffffff"}}
+   {:n 4 :start-x 200 :start-y 450 :angle 90 :len -8 :axiom "F+F+F+F" :rules {\F "F+f-FF+F+FF+Ff+FF-f+FF-F-FF-Ff-FFF" \f "ffffff"}}
 
    ; sierpinski gasket with edge rewriting
-   {:n 8 :start-x 300 :start-y 500 :angle 60 :len -7 :sentence "r" :rules {\l "r+l+r" \r "l-r-l"}}
+   {:n 8 :start-x 250 :start-y 500 :angle 60 :len -7 :axiom "r" :rules {\l "r+l+r" \r "l-r-l"}}
    ; hexagonal gosper curve with edge rewriting
-   {:n 6 :start-x 150 :start-y 500 :angle 60 :len -10 :sentence "r" :rules {\l "l+r++r-l--ll-r+" \r "-l+rr++r+l--l-r"}}
+   {:n 6 :start-x 150 :start-y 500 :angle 60 :len -10 :axiom "r" :rules {\l "l+r++r-l--ll-r+" \r "-l+rr++r+l--l-r"}}
 
    ; tree with node rewriting
-   {:n 6 :start-x 350 :start-y 600 :angle 22.5 :len -10 :sentence "F" :rules {\F "FF+[+F-F-F]-[-F+F+F]"}}
+   {:n 6 :start-x 350 :start-y 600 :angle 22.5 :len -10 :axiom "F" :rules {\F "FF+[+F-F-F]-[-F+F+F]"}}
    ; tree 2
-   {:n 9 :start-x 350 :start-y 600 :angle 20 :len -2 :sentence "f" :rules {\f "F[+f]F[-f]+f" \F "FF"}}
+   {:n 9 :start-x 350 :start-y 600 :angle 20 :len -2 :axiom "f" :rules {\f "F[+f]F[-f]+f" \F "FF"}}
    ; tree 3
-   {:n 9 :start-x 350 :start-y 600 :angle 25.7 :len -2 :sentence "f" :rules {\f "F[+f][-f]Ff" \F "FF"}}
+   {:n 9 :start-x 350 :start-y 600 :angle 25.7 :len -2 :axiom "f" :rules {\f "F[+f][-f]Ff" \F "FF"}}
    ; tree 4
-   {:n 10 :start-x 350 :start-y 600 :angle 25.7 :len -1 :sentence "f" :rules {\f "F-[[f]+f]+F[+Ff]-f" \F "FF"}}])
+   {:n 10 :start-x 350 :start-y 600 :angle 25.7 :len -1 :axiom "f" :rules {\f "F-[[f]+f]+F[+Ff]-f" \F "FF"}}])
 
 (def system (get systems 0))
 
@@ -43,7 +43,7 @@
 
 (defn setup []
   (q/frame-rate 2)
-  (:sentence system))
+  (:axiom system))
 
 (defn step [sentence]
   (if (< (q/frame-count) (:n system))
